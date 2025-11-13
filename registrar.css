@@ -1,0 +1,118 @@
+body {
+
+  font-family: 'Georgia', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: url("Batman.jpg") no-repeat center center / cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  overflow-x: hidden; /* Remove a barra de rolagem horizontal */
+ 
+}
+
+registro {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 40px;
+  width: 360px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #d3d3d3;
+  border: none;
+  font-size: 24px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #4a90e2;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+fieldset#genero {
+  border: 1px solid #4a90e2;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.checkbox input {
+  margin-right: 8px;
+}
+
+a {
+  color: #2a61d0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button[type="submit"] {
+  background: #d3d3d3;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button[type="submit"]:enabled {
+  background: #4a90e2;
+  color: white;
+}
+
+button[type="submit"]:hover:enabled {
+  background: #357abd;
+}
+a {
+  text-decoration: none;
+}

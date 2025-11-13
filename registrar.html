@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link rel="stylesheet" href="registrar.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="page">
+    
+    <!-- Lado esquerdo -->
+    <div class="left-side">
+      <div class="overlay">
+        <div class="branding">
+          <h1>TS empréstimos</h1>
+          <p>Sistema de Gestão Empresarial</p>
+          <span>Sua solução completa para gestão financeira</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="right-side">
+  <registro>
+    <button class="fechar"><a href="login.html">×</button></a>
+    <h1>REGISTRA-SE</h1>
+
+    <form id="form-registro">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" placeholder="Nome Completo" required>
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" placeholder="E-mail" required>
+
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha" placeholder="Senha" required>
+
+      <label for="confirmar-senha">Confirmar Senha</label>
+      <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirmar Senha" required>
+
+
+      <label class="checkbox">
+        <input type="checkbox" id="privacidade" required>
+        Eu li, estou ciente das condições de tratamento dos meus dados pessoais e do meu consentimento,
+        conforme descrito na <a href="#">Política de Privacidade</a>.
+      </label>
+
+      <button type="submit" id="enviar" disabled>Enviar</button>
+    </form>
+  </registro>
+  </div>
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form-registro");
+  const nome = document.getElementById("nome");
+  const email = document.getElementById("email");
+  const senha = document.getElementById("senha");
+  const confirmarSenha = document.getElementById("confirmar-senha");
+  const privacidade = document.getElementById("privacidade");
+  const enviar = document.getElementById("enviar");
+
+  // --- Habilita o botão "Enviar" só quando marcar o checkbox ---
+  privacidade.addEventListener("change", () => {
+    enviar.disabled = !privacidade.checked;
+  });
+
+  // --- Cria usuários padrão (se ainda não existir) ---
+  const usuariosPadrao = [
+    { email: "admin@ts.com", senha: "1234", nome: "Administrador" },
+    { email: "carlos@ts.com", senha: "123", nome: "Carlos" },
+    { email: "maria@ts.com", senha: "abc", nome: "Maria" }
+  ];
+  if (!localStorage.getItem("usuarios")) {
+    localStorage.setItem("usuarios", JSON.stringify(usuariosPadrao));
+    console.log("✅ Usuários padrão criados!");
+  }
+
+  // --- Registro de novo usuário ---
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const nomeVal = nome.value.trim();
+    const emailVal = email.value.trim().toLowerCase();
+    const senhaVal = senha.value.trim();
+    const confirmarVal = confirmarSenha.value.trim();
+
+    if (!nomeVal || !emailVal || !senhaVal || !confirmarVal) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
+    if (senhaVal !== confirmarVal) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    if (usuarios.some(u => u.email === emailVal)) {
+      alert("E-mail já cadastrado!");
+      return;
+    }
+
+    const novoUsuario = { nome: nomeVal, email: emailVal, senha: senhaVal };
+    usuarios.push(novoUsuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    alert("✅ Conta criada com sucesso! Faça login agora.");
+    window.location.href = "login.html";
+  });
+});
+const novo = { 
+  nome, 
+  email, 
+  senha, 
+  tipo: "comum" // padrão
+  
+};
+
+  document.getElementById("form-registro").addEventListener("submit", e => {
+    e.preventDefault();
+    const nome = nome.value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const senha = document.getElementById("senha").value.trim();
+    const confirmar = document.getElementById("confirmar-senha").value.trim();
+    const tipo = document.getElementById("tipo").value;
+
+    if (senha !== confirmar) return alert("As senhas não coincidem!");
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    if (usuarios.some(u => u.email === email)) return alert("E-mail já cadastrado!");
+
+    usuarios.push({ nome, email, senha, tipo });
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    alert("✅ Conta criada com sucesso!");
+    window.location.href = "login.html";
+  });
+
+
+</script>
+</body>
+</html>
